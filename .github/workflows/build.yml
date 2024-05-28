@@ -45,7 +45,9 @@ jobs:
           ini-values: "post_max_size=256M" #optional
 
       - name: Install dependencies
-        run: composer install
+        run: |
+          rm composer.lock
+          composer install
 
       - name: Setup Node.js
         if: false
