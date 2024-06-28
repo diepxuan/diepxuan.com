@@ -28,8 +28,10 @@ atlassian*
 /lib/internal/flex/varien/.settings
 /node_modules
 /.grunt
+/composer.lock
 /Gruntfile.js
 /package.json
+/package-lock.json
 /.php_cs
 /.php_cs.cache
 /.php-cs-fixer.php

@@ -406,6 +406,12 @@
             "Magento\\PhpStan\\": "dev/tests/static/framework/Magento/PhpStan/"
         }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
