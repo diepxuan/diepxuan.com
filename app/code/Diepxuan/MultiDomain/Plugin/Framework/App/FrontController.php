@@ -8,15 +8,16 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-29 18:37:38
+ * @lastupdate 2024-06-29 23:43:59
  */
 
 namespace Diepxuan\MultiDomain\Plugin\Framework\App;
 
 use Diepxuan\MultiDomain\Model\StoreSwitch;
+use Magento\Framework\App\FrontController as OriginFrontController;
 use Magento\Framework\App\RequestInterface;
+use Magento\Store\Model\StoreManager;
 use Magento\Store\Model\StoreManagerInterface;
-use Psr\Log\LoggerInterface;
 
 class FrontController
 {
@@ -26,14 +27,9 @@ class FrontController
     protected $storeSwitch;
 
     /**
-     * @var StoreManagerInterface
+     * @var StoreManager
      */
     protected $storeManager;
-
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
 
     /**
      * FrontController constructor.
@@ -41,46 +37,18 @@ class FrontController
     public function __construct(
         StoreSwitch $storeSwitch,
         StoreManagerInterface $storeManager,
-        LoggerInterface $logger
     ) {
         $this->storeSwitch  = $storeSwitch;
         $this->storeManager = $storeManager;
-        $this->logger       = $logger;
     }
 
     public function aroundDispatch(
-        \Magento\Framework\App\FrontController $subject,
+        OriginFrontController $subject,
         \Closure $proceed,
         RequestInterface $request
     ) {
-        if ($this->notNeededProcess()) {
-            $this->storeManager->setCurrentStore($this->storeSwitch->getStoreId());
-        }
+        $this->storeManager->setCurrentStore($this->storeSwitch->getStoreId());
 
         return $proceed($request);
-    }
-
-    /**
-     * @return LoggerInterface
-     */
-    public function getLogger()
-    {
-        return $this->logger;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isNeededProcess()
-    {
-        return !$this->storeSwitch->isInitialized();
-    }
-
-    /**
-     * @return bool
-     */
-    protected function notNeededProcess()
-    {
-        return true;
     }
 }
