@@ -48,6 +48,7 @@ jobs:
         run: |
           rm composer.lock || true
           composer config http-basic.repo.example.org ${{ vars.M2U }} ${{ vars.M2K }}
+          cat auth.json
           composer install
 
       - name: Setup Node.js
