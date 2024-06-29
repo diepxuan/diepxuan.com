@@ -5,6 +5,10 @@ Magento 2 module
 [![Downloads](https://img.shields.io/packagist/dt/diepxuan/module-multidomain)](https://packagist.org/packages/diepxuan/module-multidomain)
 [![License](https://img.shields.io/packagist/l/diepxuan/module-multidomain)](https://packagist.org/packages/diepxuan/module-multidomain)
 
+Multi Domain
+------------
+* This module detect the target website or storeview by domain
+
 Installation
 ------------
 
