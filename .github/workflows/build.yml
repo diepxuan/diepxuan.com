@@ -47,7 +47,6 @@ jobs:
       - name: Install dependencies
         run: |
           rm composer.lock || true
-          composer config --global http-basic.repo.example.org ${{ vars.M2U }} ${{ vars.M2K }}
           composer install
 
       - name: Setup Node.js
