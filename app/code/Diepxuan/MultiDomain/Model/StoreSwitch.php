@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-29 18:31:58
+ * @lastupdate 2024-06-29 23:09:07
  */
 
 namespace Diepxuan\MultiDomain\Model;
@@ -20,7 +20,6 @@ use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\BaseUrlChecker;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class StoreSwitch.
@@ -70,6 +69,8 @@ class StoreSwitch extends AbstractModel
     }
 
     /**
+     * Get store id.
+     *
      * @return bool|int
      */
     public function getStoreId()
@@ -79,13 +80,11 @@ class StoreSwitch extends AbstractModel
         }
 
         $isSecure = $this->request->isSecure();
-
         foreach ($this->storeRepository->getList() as $store) {
             $baseUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_WEB, $isSecure);
-            if ($this->baseUrlChecker($baseUrl)) {
+            if ($this->_baseUrlChecker($baseUrl)) {
                 $this->isInitialized = true;
                 $this->storeId       = $store->getId();
-                $this->getLogger()->critical($store->getName());
 
                 break;
             }
@@ -95,6 +94,8 @@ class StoreSwitch extends AbstractModel
     }
 
     /**
+     * Check this module was runed.
+     *
      * @return bool
      */
     public function isInitialized()
@@ -103,20 +104,25 @@ class StoreSwitch extends AbstractModel
     }
 
     /**
-     * @return LoggerInterface
-     */
-    public function getLogger()
-    {
-        return $this->_logger;
-    }
-
-    /**
-     * @param mixed $baseUrl
+     * Follow Magento\Store\Model\BaseUrlChecker.
+     *
+     * @param mixed $baseUrl Valid current request with store base url
      *
      * @return bool
      */
-    protected function baseUrlChecker($baseUrl)
+    private function _baseUrlChecker($baseUrl)
     {
-        return $this->baseUrlChecker->execute(parse_url($baseUrl), $this->request);
+        extract(parse_url($baseUrl));
+        $request       = $this->request;
+        $requestUri    = $request->getRequestUri() ?: '/';
+        $isValidSchema = !isset($scheme) || $scheme       === $request->getScheme();
+        $isValidHost   = !isset($host)   || $host         === $request->getHttpHost();
+        $isValidHost   = $isValidHost    || "www.{$host}" === $request->getHttpHost();
+        $isValidPath   = !isset($path)   || str_contains($requestUri, (string) $path);
+
+        return $isValidSchema
+            && $isValidHost
+            && $isValidPath
+            || $this->baseUrlChecker->execute(parse_url($baseUrl), $request);
     }
 }
