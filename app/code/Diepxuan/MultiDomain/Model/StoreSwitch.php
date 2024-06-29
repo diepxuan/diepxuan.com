@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-29 23:09:07
+ * @lastupdate 2024-06-29 23:48:46
  */
 
 namespace Diepxuan\MultiDomain\Model;
@@ -75,32 +75,17 @@ class StoreSwitch extends AbstractModel
      */
     public function getStoreId()
     {
-        if ($this->isInitialized()) {
-            return $this->storeId;
-        }
-
         $isSecure = $this->request->isSecure();
         foreach ($this->storeRepository->getList() as $store) {
             $baseUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_WEB, $isSecure);
             if ($this->_baseUrlChecker($baseUrl)) {
-                $this->isInitialized = true;
-                $this->storeId       = $store->getId();
+                $this->storeId = $store->getId();
 
                 break;
             }
         }
 
         return $this->storeId;
-    }
-
-    /**
-     * Check this module was runed.
-     *
-     * @return bool
-     */
-    public function isInitialized()
-    {
-        return $this->isInitialized;
     }
 
     /**
