@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-29 23:43:59
+ * @lastupdate 2024-06-30 18:42:45
  */
 
 namespace Diepxuan\MultiDomain\Plugin\Framework\App;
@@ -16,7 +16,7 @@ namespace Diepxuan\MultiDomain\Plugin\Framework\App;
 use Diepxuan\MultiDomain\Model\StoreSwitch;
 use Magento\Framework\App\FrontController as OriginFrontController;
 use Magento\Framework\App\RequestInterface;
-use Magento\Store\Model\StoreManager;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\StoreManagerInterface;
 
 class FrontController
@@ -27,27 +27,33 @@ class FrontController
     protected $storeSwitch;
 
     /**
-     * @var StoreManager
-     */
-    protected $storeManager;
-
-    /**
      * FrontController constructor.
      */
     public function __construct(
         StoreSwitch $storeSwitch,
         StoreManagerInterface $storeManager,
     ) {
-        $this->storeSwitch  = $storeSwitch;
-        $this->storeManager = $storeManager;
+        $this->storeSwitch = $storeSwitch;
     }
 
+    /**
+     * Perform action and generate response.
+     *
+     * @param HttpRequest|RequestInterface $request
+     *
+     * @return ResponseInterface|ResultInterface
+     *
+     * @throws \LogicException
+     * @throws LocalizedException
+     */
     public function aroundDispatch(
         OriginFrontController $subject,
         \Closure $proceed,
         RequestInterface $request
     ) {
-        $this->storeManager->setCurrentStore($this->storeSwitch->getStoreId());
+        $this->storeSwitch->execute();
+
+        $request->setDispatched(false);
 
         return $proceed($request);
     }

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-29 23:48:46
+ * @lastupdate 2024-06-30 18:43:37
  */
 
 namespace Diepxuan\MultiDomain\Model;
@@ -19,7 +19,10 @@ use Magento\Framework\Model\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
+use Magento\Store\Api\StoreResolverInterface;
 use Magento\Store\Model\BaseUrlChecker;
+use Magento\Store\Model\StoreManager;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class StoreSwitch.
@@ -42,6 +45,11 @@ class StoreSwitch extends AbstractModel
     protected $storeRepository;
 
     /**
+     * @var StoreManager
+     */
+    protected $storeManager;
+
+    /**
      * @var bool
      */
     protected $isInitialized = false;
@@ -52,6 +60,11 @@ class StoreSwitch extends AbstractModel
     protected $storeId = false;
 
     /**
+     * @var StoreResolverInterface
+     */
+    protected $storeResolver;
+
+    /**
      * StoreSwitch constructor.
      */
     public function __construct(
@@ -59,13 +72,17 @@ class StoreSwitch extends AbstractModel
         Registry $registry,
         BaseUrlChecker $baseUrlChecker,
         RequestInterface $request,
-        StoreRepositoryInterface $storeRepository
+        StoreRepositoryInterface $storeRepository,
+        StoreManagerInterface $storeManager,
+        StoreResolverInterface $storeResolver
     ) {
         parent::__construct($context, $registry);
 
         $this->baseUrlChecker  = $baseUrlChecker;
         $this->request         = $request;
         $this->storeRepository = $storeRepository;
+        $this->storeManager    = $storeManager;
+        $this->storeResolver   = $storeResolver;
     }
 
     /**
@@ -75,6 +92,9 @@ class StoreSwitch extends AbstractModel
      */
     public function getStoreId()
     {
+        if ($this->storeId) {
+            return $this->storeId;
+        }
         $isSecure = $this->request->isSecure();
         foreach ($this->storeRepository->getList() as $store) {
             $baseUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_WEB, $isSecure);
@@ -88,6 +108,24 @@ class StoreSwitch extends AbstractModel
         return $this->storeId;
     }
 
+    public function execute(): void
+    {
+        if ($this->getStoreId() && $this->getStoreId() !== $this->storeResolver->getCurrentStoreId()) {
+            $this->storeResolver->getCurrentStoreId();
+            $this->storeManager->setCurrentStore($this->getStoreId());
+        }
+    }
+
+    /**
+     * Gets base URL checker.
+     *
+     * @return BaseUrlChecker
+     */
+    public function getBaseUrlChecker()
+    {
+        return $this->baseUrlChecker;
+    }
+
     /**
      * Follow Magento\Store\Model\BaseUrlChecker.
      *
@@ -97,13 +135,16 @@ class StoreSwitch extends AbstractModel
      */
     private function _baseUrlChecker($baseUrl)
     {
+        // return $this->baseUrlChecker->execute(parse_url($baseUrl), $request);
         extract(parse_url($baseUrl));
-        $request       = $this->request;
-        $requestUri    = $request->getRequestUri() ?: '/';
-        $isValidSchema = !isset($scheme) || $scheme       === $request->getScheme();
-        $isValidHost   = !isset($host)   || $host         === $request->getHttpHost();
-        $isValidHost   = $isValidHost    || "www.{$host}" === $request->getHttpHost();
-        $isValidPath   = !isset($path)   || str_contains($requestUri, (string) $path);
+        $request = $this->request;
+        if (!isset($scheme) || !isset($host) || !isset($path)) {
+            return false;
+        }
+        $isValidSchema = $scheme === $request->getScheme();
+        $isValidHost   = $host === $request->getHttpHost();
+        $isValidHost   = $isValidHost || $host === "www.{$request->getHttpHost()}";
+        $isValidPath   = str_contains($request->getRequestUri() ?: '/', (string) $path);
 
         return $isValidSchema
             && $isValidHost
