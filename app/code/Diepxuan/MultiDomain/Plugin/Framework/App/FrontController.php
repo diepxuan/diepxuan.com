@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-30 18:42:45
+ * @lastupdate 2024-06-30 22:01:37
  */
 
 namespace Diepxuan\MultiDomain\Plugin\Framework\App;
@@ -17,7 +17,6 @@ use Diepxuan\MultiDomain\Model\StoreSwitch;
 use Magento\Framework\App\FrontController as OriginFrontController;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Store\Model\StoreManagerInterface;
 
 class FrontController
 {
@@ -30,8 +29,7 @@ class FrontController
      * FrontController constructor.
      */
     public function __construct(
-        StoreSwitch $storeSwitch,
-        StoreManagerInterface $storeManager,
+        StoreSwitch $storeSwitch
     ) {
         $this->storeSwitch = $storeSwitch;
     }
