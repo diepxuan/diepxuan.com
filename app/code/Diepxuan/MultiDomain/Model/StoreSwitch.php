@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-06-30 18:43:37
+ * @lastupdate 2024-07-05 17:53:55
  */
 
 namespace Diepxuan\MultiDomain\Model;
@@ -101,7 +101,7 @@ class StoreSwitch extends AbstractModel
             if ($this->_baseUrlChecker($baseUrl)) {
                 $this->storeId = $store->getId();
 
-                break;
+                return $this->storeId;
             }
         }
 
