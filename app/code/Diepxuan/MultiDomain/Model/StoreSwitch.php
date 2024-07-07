@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2024-07-05 17:53:55
+ * @lastupdate 2024-07-07 16:03:41
  */
 
 namespace Diepxuan\MultiDomain\Model;
@@ -96,6 +96,8 @@ class StoreSwitch extends AbstractModel
             return $this->storeId;
         }
         $isSecure = $this->request->isSecure();
+
+        /** @var Magento\Store\Model\Store $store */
         foreach ($this->storeRepository->getList() as $store) {
             $baseUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_WEB, $isSecure);
             if ($this->_baseUrlChecker($baseUrl)) {
