@@ -356,7 +356,8 @@
         "diepxuan/module-magento": "*",
         "diepxuan/module-images": "*",
         "diepxuan/module-eavcleaner": "*",
-        "diepxuan/module-autologin": "*"
+        "diepxuan/module-autologin": "*",
+        "diepxuan/module-dbunsupport": "*"
     },
     "conflict": {
         "gene/bluefoot": "*"
