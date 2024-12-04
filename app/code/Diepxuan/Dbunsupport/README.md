@@ -1,9 +1,10 @@
 Allow un-support for Magento 2
 ==================
-[![Latest version](https://img.shields.io/badge/latest-0.0.1-green.svg)](https://github.com/diepxuan/module-sitemap)
-[![Packagist](https://img.shields.io/badge/packagist-0.0.1-green.svg)](https://packagist.org/packages/diepxuan/module-sitemap)
-[![Magento 2](https://img.shields.io/badge/Magento-%3E=2.4-blue.svg)](https://github.com/magento/magento2/tree/2.4.4)
-[![PHP >= 7.4](https://img.shields.io/badge/PHP-%3E=7.4-blue.svg)](https://packagist.org/packages/diepxuan/module-sitemap)
+[![Packagist](https://img.shields.io/packagist/v/diepxuan/module-dbunsupport)](https://packagist.org/packages/diepxuan/module-dbunsupport)
+[![Magento 2](https://img.shields.io/badge/Magento-%3E=2.4-blue.svg)](https://github.com/magento/magento2)
+[![Downloads](https://img.shields.io/packagist/dt/diepxuan/module-dbunsupport)](https://packagist.org/packages/diepxuan/module-dbunsupport)
+[![License](https://img.shields.io/packagist/l/diepxuan/module-dbunsupport)](https://packagist.org/packages/diepxuan/module-dbunsupport)
+
 
 Allow Magento 2 un-support
 --------------
