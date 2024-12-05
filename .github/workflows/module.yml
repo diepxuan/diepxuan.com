@@ -30,13 +30,13 @@ jobs:
       GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
       GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
       SSH_ID_RSA: ${{ secrets.SSH_ID_RSA }}
-    theme:
-      permissions:
-        contents: write
-      uses: diepxuan/.github/.github/workflows/magento-theme-update.yml@main
-      secrets:
-        GPG_KEY: ${{ secrets.GPG_KEY }}
-        GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-        GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-        SSH_ID_RSA: ${{ secrets.SSH_ID_RSA }}
+  theme:
+    permissions:
+      contents: write
+    uses: diepxuan/.github/.github/workflows/magento-theme-update.yml@main
+    secrets:
+      GPG_KEY: ${{ secrets.GPG_KEY }}
+      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+      GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
+      SSH_ID_RSA: ${{ secrets.SSH_ID_RSA }}
 
