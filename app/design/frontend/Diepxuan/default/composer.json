@@ -9,13 +9,8 @@
     "config": {
         "sort-packages": true
     },
-    "version": "1.0.0",
-    "replace": {
-        "diepxuan/theme-frontend-dxvn": "0.*"
-    },
     "require": {
-        "php": "~7.3.0||~7.4.0",
-        "magento/framework": "102.0.*"
+        "magento/theme-frontend-luma": "*"
     },
     "autoload": {
         "files": [

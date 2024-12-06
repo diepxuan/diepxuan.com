@@ -1,15 +1,13 @@
 # Dxvn theme for Magento 2
 
-[![Latest version](https://img.shields.io/badge/latest-1.0.0-green.svg)](https://github.com/diepxuan/theme-frontend-default)
-[![Packagist](https://img.shields.io/badge/packagist-1.0.0-green.svg)](https://packagist.org/packages/diepxuan/theme-frontend-default)
-[![Magento 2](https://img.shields.io/badge/Magento-%3E=2.1-blue.svg)](https://github.com/magento/magento2/tree/2.1)
-[![Blank Theme 2](https://img.shields.io/badge/BlankTheme-%3E=2.1-blue.svg)](https://github.com/magento/magento2/tree/2.1)
-[![PHP >= 5.5.22](https://img.shields.io/badge/PHP-%3E=5.6.5-blue.svg)](https://packagist.org/packages/diepxuan/theme-frontend-default)
+[![Magento 2](https://img.shields.io/badge/Magento-%3E=2.4-blue.svg)](https://github.com/magento/magento2)
+[![Packagist](https://img.shields.io/packagist/v/diepxuan/theme-frontend-default)](https://packagist.org/packages/diepxuan/theme-frontend-default)
+[![Downloads](https://img.shields.io/packagist/dt/diepxuan/theme-frontend-default)](https://packagist.org/packages/diepxuan/theme-frontend-default)
+[![License](https://img.shields.io/packagist/l/diepxuan/theme-frontend-default)](https://packagist.org/packages/diepxuan/theme-frontend-default)
 
-## Angular theme
+## DiepXuan theme
 
-This theme base from magento theme blank.
-Amend load block by angular.
+This theme base from magento theme luma for DiepXuan Co.,Ltd.
 
 ## Installation
 
