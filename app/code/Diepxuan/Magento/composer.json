@@ -1,0 +1,25 @@
+{
+    "name": "diepxuan/module-magento",
+    "description": "DiepXuan website base in Magento 2",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tran Ngoc Duc",
+            "email": "ductn@diepxuan.com"
+        }
+    ],
+    "require": {
+        "diepxuan/module-images": "*",
+        "diepxuan/module-eavcleaner": "*",
+        "diepxuan/module-multidomain": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Diepxuan\\Magento\\": ""
+        }
+    }
+}

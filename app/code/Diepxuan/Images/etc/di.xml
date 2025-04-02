@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Framework\Api\ImageProcessor" type="Diepxuan\Images\Framework\Api\ImageProcessor"/>
+    <preference for="Magento\MediaGalleryRenditionsApi\Api\GetRenditionPathInterface" type="Magento\MediaGalleryRenditions\Model\GetRenditionPath"/>
+    <preference for="Magento\MediaGalleryApi\Api\IsPathExcludedInterface" type="Magento\MediaGallery\Model\Directory\IsExcluded"/>
+    <!-- <preference for="Magento\Catalog\Model\Product\Gallery\MimeTypeExtensionMap" type="Diepxuan\Images\Plugin\Catalog\Model\Product\Gallery\MimeTypeExtensionMap" /> -->
+    <type name="Magento\Framework\Filesystem\Io\File">
+        <plugin name="Diepxuan_Images::systemIoFile" type="Diepxuan\Images\Plugin\Framework\Filesystem\Io\File" />
+    </type>
+    <type name="Magento\Catalog\Model\Product\Gallery\MimeTypeExtensionMap">
+        <plugin name="Diepxuan_Images::productGalleryMimeTypeExtensionMap" type="Diepxuan\Images\Plugin\Catalog\Model\Product\Gallery\MimeTypeExtensionMap" />
+    </type>
+    <type name="Magento\Catalog\Model\Product\Gallery\Processor">
+        <plugin name="Diepxuan_Images::productGalleryProcessor" type="Diepxuan\Images\Plugin\Catalog\Model\Product\Gallery\Processor" />
+    </type>
+    <type name="Magento\MediaGalleryRenditions\Model\GenerateRenditions">
+        <plugin name="Diepxuan_Images::mediaGalleryRenditions" type="Diepxuan\Images\Plugin\MediaGalleryRenditions\Model\GenerateRenditions" />
+    </type>
+    <type name="Magento\Theme\Helper\Storage">
+        <plugin name="Diepxuan_Images::themeHelperStorage" type="Diepxuan\Images\Plugin\Theme\Helper\Storage" />
+    </type>
+    <!-- Magento/MediaGalleryRenditions/etc/di.xml -->
+    <!-- <type name="Magento\MediaGalleryRenditions\Model\Queue\FetchRenditionPathsBatches">
+        <arguments>
+            <argument name="fileExtensions" xsi:type="array">
+                <item name="svg" xsi:type="string">svg</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+        </arguments>
+    </type> -->
+    <!-- Magento/Cms/etc/di.xml -->
+    <type name="Magento\Cms\Model\Wysiwyg\Images\Storage">
+        <arguments>
+            <argument name="extensions" xsi:type="array">
+                <item name="allowed" xsi:type="array">
+                    <item name="svg" xsi:type="string">image/svg+xml</item>
+                    <item name="webp" xsi:type="string">image/webp</item>
+                </item>
+                <item name="image_allowed" xsi:type="array">
+                    <item name="svg" xsi:type="string">image/svg+xml</item>
+                    <item name="webp" xsi:type="string">image/webp</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Magento/MediaGalleryIntegration/etc/di.xml -->
+    <type name="Magento\MediaGalleryIntegration\Plugin\SaveImageInformation">
+        <arguments>
+            <argument name="imageExtensions" xsi:type="array">
+                <item name="svg" xsi:type="string">svg</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Api\ImageContentValidator">
+        <arguments>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="svg" xsi:type="string">image/svg+xml</item>
+                <item name="webp" xsi:type="string">image/webp</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Magento/Catalog/etc/di.xml -->
+    <virtualType name="Magento\Catalog\CategoryImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="svg" xsi:type="string">svg</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="svg" xsi:type="string">image/svg+xml</item>
+                <item name="webp" xsi:type="string">image/webp</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Magento/MediaGallerySynchronization/etc/di.xml -->
+    <type name="Magento\MediaGallerySynchronization\Model\FetchMediaStorageFileBatches">
+        <arguments>
+            <argument name="batchSize" xsi:type="number">100</argument>
+            <argument name="fileExtensions" xsi:type="array">
+                <item name="svg" xsi:type="string">svg</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

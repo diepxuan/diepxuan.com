@@ -1,0 +1,24 @@
+{
+    "name": "diepxuan/module-dbunsupport",
+    "description": "Override Module to allow MariaDB 10.11 support for development",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "Tran Ngoc Duc",
+            "email": "ductn@diepxuan.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Diepxuan\\Dbunsupport\\": ""
+        }
+    }
+}

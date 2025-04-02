@@ -1,0 +1,49 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Diepxuan\GoogleMaps\Block\LocationList;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Framework\Escaper;
+
+// @var Escaper $escaper
+// @var LocationList $block
+
+// phpcs:disable Generic.Files.LineLength.TooLong
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+?>
+<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->count())) { ?>
+    <?php
+    $type = 'widget-product-grid';
+
+    $mode = 'grid';
+
+    $image = 'new_products_content_widget_grid';
+    $items = $block->getProductCollection()->getItems();
+
+    $showWishlist = true;
+    $showCompare  = true;
+    $showCart     = true;
+    $templateType = ReviewRendererInterface::SHORT_VIEW;
+    $description  = false;
+    ?>
+    <div class="block widget block-products-list <?php echo /* @noEscape */ $mode; ?>">
+        <?php if ($block->getTitle()) { ?>
+            <div class="block-title">
+                <strong><?php echo $escaper->escapeHtml(__($block->getTitle())); ?></strong>
+            </div>
+        <?php } ?>
+        <div class="block-content">
+            <?php echo /* @noEscape */ '<!-- ' . $image . '-->'; ?>
+            <div class="products-<?php echo /* @noEscape */ $mode; ?> <?php echo /* @noEscape */ $mode; ?>">
+                <ol class="product-items <?php echo /* @noEscape */ $type; ?>">
+
+                </ol>
+            </div>
+            <?php echo $block->getPagerHtml(); ?>
+        </div>
+    </div>
+<?php }?>

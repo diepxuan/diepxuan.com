@@ -1,0 +1,23 @@
+{
+    "name": "diepxuan/module-autologin",
+    "description": "Autologin module for Magento 2",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tran Ngoc Duc",
+            "email": "ductn@diepxuan.com"
+        }
+    ],
+    "require": {
+      "diepxuan/module-magento": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Diepxuan\\Autologin\\": ""
+        }
+    }
+}

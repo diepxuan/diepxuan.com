@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="footer_links">
+            <referenceBlock name="sales-guest-form-link" remove="true"/>
+            <referenceBlock name="catalog-search-advanced-link" remove="true" />
+            <referenceBlock name="privacy-policy-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Privacy and Cookie Policy</argument>
+                    <argument name="path" xsi:type="string">privacy-policy-cookie-restriction-mode</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="contact-us-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
+                    <argument name="path" xsi:type="string">lienhe</argument>
+                </arguments>
+            </referenceBlock>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="noi-qui-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Nội quy cửa hàng</argument>
+                    <argument name="path" xsi:type="string">noi-quy-cua-hang</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="he-thong-cua-hang-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Hệ thống cửa hàng</argument>
+                    <argument name="path" xsi:type="string">he-thong-cua-hang</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="footer">
+            <referenceBlock name="store_switcher" remove="true"/>
+        </referenceContainer>
+    </body>
+</page>
