@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2025-04-02 17:15:50
+ * @lastupdate 2025-04-02 20:33:04
  */
 
 namespace Diepxuan\SyncCRM\Sync;
@@ -76,7 +76,7 @@ class ProductSync extends CrmSync
             $products = $this->fetch('products');
             $this->appState->setAreaCode(Area::AREA_ADMINHTML);
 
-            $iError = 0;
+            // $iError = 0;
 
             foreach ($products as $productData) {
                 $sku      = $productData['ma_vt'];
@@ -131,7 +131,7 @@ class ProductSync extends CrmSync
                 $stockItem->setIsInStock($quantity > 0 ? 1 : 0);
                 $this->stockItemRepository->save($stockItem);
 
-                ++$iError;
+                // ++$iError;
                 // printf(<<<EOF
                 //     {$iError} {$product->getStatus()} [{$ksd}|{$quantity}] {$product->getName()}
                 //             SKU: {$product->getSku()}

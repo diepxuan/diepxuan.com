@@ -11,8 +11,7 @@
     ],
     "require": {
         "diepxuan/module-images": "*",
-        "diepxuan/module-eavcleaner": "*",
-        "diepxuan/module-multidomain": "*"
+        "diepxuan/module-eavcleaner": "*"
     },
     "autoload": {
         "files": [

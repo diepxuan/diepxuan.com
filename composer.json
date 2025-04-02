@@ -21,11 +21,12 @@
     },
     "version": "2.4.7-p4",
     "require": {
-        "magento/product-community-edition": "2.4.7-p4",
+        "diepxuan/module-magento": "*",
+        "diepxuan/module-multidomain": "*",
+        "diepxuan/php-charset": "*",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
-        "diepxuan/module-magento": "*",
-        "diepxuan/php-charset": "*"
+        "magento/product-community-edition": "2.4.7-p4"
     },
     "replace": {
         "diepxuan/module-magento": "*",
@@ -95,4 +96,3 @@
         "magento-force": "override"
     }
 }
-
