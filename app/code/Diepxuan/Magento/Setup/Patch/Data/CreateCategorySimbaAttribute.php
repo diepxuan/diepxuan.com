@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author     Tran Ngoc Duc <ductn@diepxuan.com>
  * @author     Tran Ngoc Duc <caothu91@gmail.com>
  *
- * @lastupdate 2025-04-02 09:25:29
+ * @lastupdate 2025-04-03 10:58:56
  */
 
 namespace Diepxuan\Magento\Setup\Patch\Data;
@@ -23,9 +23,19 @@ use Magento\Framework\Setup\Patch\PatchVersionInterface;
 
 class CreateCategorySimbaAttribute implements DataPatchInterface, PatchVersionInterface
 {
+    /**
+     * @var EavSetupFactory
+     */
     private $eavSetupFactory;
+
+    /**
+     * @var ModuleDataSetupInterface
+     */
     private $moduleDataSetup;
 
+    /**
+     * PatchInitial constructor.
+     */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
         EavSetupFactory $eavSetupFactory
@@ -36,8 +46,6 @@ class CreateCategorySimbaAttribute implements DataPatchInterface, PatchVersionIn
 
     public function apply()
     {
-        // $this->moduleDataSetup->getConnection()->startSetup();
-
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         if ($eavSetup->getAttribute(Category::ENTITY, 'simba_category')) {
@@ -58,7 +66,16 @@ class CreateCategorySimbaAttribute implements DataPatchInterface, PatchVersionIn
         );
 
         return $this;
-        // $this->moduleDataSetup->getConnection()->endSetup();
+    }
+
+    public function revert()
+    {
+        /** @var EavSetup $eavSetup */
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
+
+        $eavSetup->removeAttribute(Category::ENTITY, 'simba_category');
+
+        return $this;
     }
 
     public static function getDependencies()
