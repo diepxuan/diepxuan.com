@@ -9,4 +9,7 @@
     <type name="Magento\Framework\App\FrontController">
         <plugin name="Diepxuan_MultiDomain::storeDetectUrl" type="Diepxuan\MultiDomain\Plugin\Framework\App\FrontController"/>
     </type>
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="catalogTopmenu" type="Diepxuan\MultiDomain\Plugin\Catalog\Plugin\Block\Topmenu" />
+    </type>
 </config>
