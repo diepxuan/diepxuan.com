@@ -21,8 +21,12 @@
     },
     "version": "2.4.7-p4",
     "require": {
+        "diepxuan/module-autologin": "*",
+        "diepxuan/module-dbunsupport": "*",
+        "diepxuan/module-eavcleaner": "*",
         "diepxuan/module-magento": "*",
         "diepxuan/module-multidomain": "*",
+        "diepxuan/module-synccrm": "*",
         "diepxuan/php-charset": "*",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
@@ -30,7 +34,6 @@
     },
     "replace": {
         "diepxuan/module-magento": "*",
-        "diepxuan/module-images": "*",
         "diepxuan/module-eavcleaner": "*",
         "diepxuan/module-autologin": "*",
         "diepxuan/module-dbunsupport": "*",
