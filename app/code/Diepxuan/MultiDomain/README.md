@@ -7,7 +7,8 @@ Magento 2 module
 
 Multi Domain
 ------------
-* This module detect the target website or storeview by domain
+* Automatically detects and switches to the target website or store view based on the domain
+* Allows selecting a level 2 category as the Root Category of the Store
 
 Installation
 ------------
