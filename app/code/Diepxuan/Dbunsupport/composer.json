@@ -1,6 +1,6 @@
 {
     "name": "diepxuan/module-dbunsupport",
-    "description": "Override Module to allow MariaDB 10.11 support for development",
+    "description": "Magento 2 module to override and allow MariaDB 10.11 support for development environments.",
     "type": "magento2-module",
     "license": [
         "OSL-3.0",
