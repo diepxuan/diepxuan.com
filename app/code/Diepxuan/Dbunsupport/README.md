@@ -6,10 +6,10 @@ Allow un-support for Magento 2
 [![License](https://img.shields.io/packagist/l/diepxuan/module-dbunsupport)](https://packagist.org/packages/diepxuan/module-dbunsupport)
 
 
-Allow Magento 2 un-support
+Magento 2 Allow Database Compatibility Override
 --------------
 
-Override Module to allow MariaDB 10.5 to 10.9 support for development
+This module overrides the database compatibility checks in Magento 2 to allow the use of MariaDB versions 10.5 to 10.9, which are not officially supported but are commonly used in development environments.
 
 
 Installation
