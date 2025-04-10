@@ -1,0 +1,23 @@
+{
+    "name": "diepxuan/module-shopee-connector",
+    "description": "Shopee integration for Magento 2",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tran Ngoc Duc",
+            "email": "ductn@diepxuan.com"
+        }
+    ],
+    "require": {
+      "diepxuan/module-magento": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Diepxuan\\ShopeeConnector\\": ""
+        }
+    }
+}
